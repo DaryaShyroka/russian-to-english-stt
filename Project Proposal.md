@@ -45,7 +45,7 @@ https://www.aclweb.org/anthology/W19-5209.pdf
 ### *Evaluation:*
 - How will you ``evaluate`` your system? For example, if you are going to do MT, you could evaluate in ``BLEU``. For text classification, you can use ``accuracy`` and ``macro F1`` score. If your projects involves some interpretability, you could use ``visualization`` as a vehicle of deriving insights (and possibly some form of ``accuracy`` as approbriate).
 
-We will evaluate our machine translations using ``BLEU``.
+We will evaluate our ASR using Word Error Rate (WER). We will evaluate our machine translations using ``BLEU``. If we use Spoken Language Translation, we will also use BLEU.
 
 ### *Conclusion (optional):*
 - You can have a very brief conclusion just summarizing the goal of the proposal. (2-3 sentences max).
