@@ -32,9 +32,20 @@ Part of the data we will be using would be 9 English subtitle files that Darya w
 - What ``computing infrastructure`` will you use? Personal computers? Google Colab? Google Cloud TPUs?
 - What ``deep learning of NLP (DL-NLP)`` methods will you employ? For example, will you do ``text classification with BERT?``, ``MT with attention-based BiLSTMs``, ``language generation with transformers``, etc.? 
 - ``Framework`` you will use. Note: You *must* use PyTorch. Identify any ``existing codebase`` you can start off with. Provide links.
+
+We will be using Google Colab as well as Jupyter notebooks on our personal computers. We will use Wav2Vec2 for ASR and we will test different models for machine translation, including attention-based bi-LSTMs and Transformers. We will use the PyTorch framework.
+
 ### *Previous Works (minimal):*
 - Refer to one or more projects that people have carried out that may be somewhat relevant to your project. This will later be expanded to some form of ``literature review``. For the sake of the proposal, this can be very brief. You are encouraged to refer to previous work here as a way to alert you to benefiting from existing projects. Provide links to any such projects.
+
+https://ieeexplore.ieee.org/abstract/document/8001709
+https://link.springer.com/chapter/10.1007/978-981-15-3514-7_1
+https://www.aclweb.org/anthology/W19-5209.pdf
+
 ### *Evaluation:*
 - How will you ``evaluate`` your system? For example, if you are going to do MT, you could evaluate in ``BLEU``. For text classification, you can use ``accuracy`` and ``macro F1`` score. If your projects involves some interpretability, you could use ``visualization`` as a vehicle of deriving insights (and possibly some form of ``accuracy`` as approbriate).
+
+We will evaluate our machine translations using ``BLEU``.
+
 ### *Conclusion (optional):*
 - You can have a very brief conclusion just summarizing the goal of the proposal. (2-3 sentences max).
