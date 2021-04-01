@@ -17,8 +17,17 @@ The problem we will be working on is automatic subtitle generation. We will be a
 ### *Motivation and Contributions/Originality:*
 - ``What is the motivation for pursuing this project?`` In other words, ``why is the project important``. This could be because this is a ``(relatively) new problem`` where you are using an existing method on (e.g., translating tweets where the language is noisy and doesn't usually obey `standard` rules). This could also be because the problem is ``timely`` (e.g., carrying out ``sentiment analysis on COVID-19`` data, given the negative impact of the pandemic). Further, this could be because the problem is ``socially motivated`` and/or ``remains unsolved`` (e.g., ``toxic`` and/or ``racist`` comments on social media, given their pervasively harmful impact).  
 - What do you hope your ``contribution`` will be? Here, you could aim at providing a ``better system`` than what exists (e.g., more robust MT), an application on new data (possibly within a new domain) (e.g., ``tweet intent and topic detection on COVID-19 data``), a system that delivers insights on a new topic (e.g., ``scale and sentiment in tweets in different location as to COVID-19``), etc. 
+
+The motivation for this project is to improve existing automatic subtitling systems. Currently, auto-translated subtitles on YouTube produce very bad results, so we wanted to see if we could do better. 
+
 ### *Data:*
 - What kind of ``data`` will you be using? ``Describe the corpus``: genre, size, language, style, etc. Do you have the data? Will you acquire the data? How? Where will you ``store`` your data? 
+
+Part of the data we will be using would be 9 English subtitle files that Darya wrote a few years ago, as well as the corresponding video files.
+
+- There are also 4 subtitle files I found on the internet.
+- We will probably need to get a parallel Russian-English corpus to train on the MT translation part (our data might not be enough). 
+
 ### *Engineering:*
 - What ``computing infrastructure`` will you use? Personal computers? Google Colab? Google Cloud TPUs?
 - What ``deep learning of NLP (DL-NLP)`` methods will you employ? For example, will you do ``text classification with BERT?``, ``MT with attention-based BiLSTMs``, ``language generation with transformers``, etc.? 
