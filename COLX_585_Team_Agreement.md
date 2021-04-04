@@ -1,5 +1,5 @@
+## Teamwork Contract
 ### COLX 585: Trends in Computational Linguistics
-#### Team Agreement
 #### Team members: Dasha, Ali, Shreyas, Ladan 
 
 All team members agree on the following terms and conditions:
