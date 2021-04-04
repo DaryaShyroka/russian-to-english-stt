@@ -1,7 +1,5 @@
 ## Project proposal
 
-Describe your proposed project. Your should include the following information and anything else you deem relevant:
-
 ### *Introduction:* 
 
 Originally, we wanted to create an end-to-end system for automatic subtitle generation. We wanted to try out two approaches:  
@@ -19,7 +17,7 @@ The motivation for this project is to improve existing automatic subtitling syst
 ### *Data:*
 - What kind of ``data`` will you be using? ``Describe the corpus``: genre, size, language, style, etc. Do you have the data? Will you acquire the data? How? Where will you ``store`` your data? 
 
-OpenSLR has data - all audio recorded in quiet environment with clear speech (no interference from background music): 98 hours.
+We will be using data from OpenSLR. It contains 98 hours of Russian speech data, all recorded in quiet environment with clear speech and no interference from background noise or music. We will download the data from the site [https://openslr.org/resources.php] and we will store it on our personal laptops or on Google Drive.
 
 
 ### *Engineering:*
