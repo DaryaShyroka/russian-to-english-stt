@@ -23,7 +23,7 @@ We will be using data from OpenSLR. It contains 98 hours of Russian speech data 
 - What ``deep learning of NLP (DL-NLP)`` methods will you employ? For example, will you do ``text classification with BERT?``, ``MT with attention-based BiLSTMs``, ``language generation with transformers``, etc.? 
 - ``Framework`` you will use. Note: You *must* use PyTorch. Identify any ``existing codebase`` you can start off with. Provide links.
 
-We will be using Google Colab as well as Jupyter notebooks on our personal computers. We will use Wav2Vec2 and OpenSLR for ASR. We will use the PyTorch framework.
+We will be using Google Colab as well as Jupyter notebooks on our personal computers. We will use Wav2Vec2 for ASR. We will use the PyTorch framework.
 
 ### *Previous Works (minimal):*
 - Refer to one or more projects that people have carried out that may be somewhat relevant to your project. This will later be expanded to some form of ``literature review``. For the sake of the proposal, this can be very brief. You are encouraged to refer to previous work here as a way to alert you to benefiting from existing projects. Provide links to any such projects.
