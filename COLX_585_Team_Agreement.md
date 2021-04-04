@@ -14,7 +14,7 @@ On average it is expected that each member of the team will spend 4-6 hrs (appro
  
 3. **Meeting schedule**:
 
-- The meetings will be (tentatively) scheduled as follows:
+The meetings will be (tentatively) scheduled as follows:
    - a. Mondays (2:00-4:00 pm PST): discuss the plan for the coming week ;
    - b. Meeting with mentor;
    - c. Following up the mentor meeting and (optionally) a follow up discussion based on the mentor feedback;
@@ -46,7 +46,7 @@ The team members are available from 8:00-5:00 PST Monday-Saturday, excluding lec
 
 We will not have a Project Manager for this project, and instead we will be entirely democratic throughout the project. We will make decisions together, and split up our responsibilities equally.
  
-9. **Code of conduct**:
+10. **Code of conduct**:
    - All team members will focus on what is best for the project.
    - All of us should participate in the project equally. 
    - We will communicate effectively, taking care not to offend others.
