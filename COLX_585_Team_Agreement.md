@@ -40,13 +40,18 @@ Every team member will put all their effort to create the highest quality of wor
  
 8. **Availability**:
 
-The team members are available from 8:00-5:00 PST, excluding lecture and lab times. This may change based on project needs or unexpected circumstances, in which case it will be communicated in advance.
+The team members are available from 8:00-5:00 PST Monday-Saturday, excluding lecture and lab times. This may change based on project needs or unexpected circumstances, in which case it will be communicated in advance. We will try our best to complete work before Sunday, however if needed, team members will be available to finish work on Sundays.
+
+9. **Project Manager**:
+
+We will not have a Project Manager for this project, and instead we will be entirely democratic throughout the project. We will make decisions together, and split up our responsibilities equally.
  
 9. **Code of conduct**:
    - All team members will focus on what is best for the project.
    - All of us should participate in the project equally. 
-   - Communicate in a proper way, not offending others in any case.
-   - We will make sure to 
+   - We will communicate effectively, taking care not to offend others.
+   - We will make sure to be respectful of others and their time.
+   - We will make sure to actively participate in the project, and reply or react to Slack messages in the group channel within a reasonable timeframe. 
 
 
 
