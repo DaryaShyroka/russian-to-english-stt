@@ -15,10 +15,8 @@ However, we would need a lot of time to train such a system. We would also need 
 The motivation for this project is to improve existing automatic subtitling systems. Currently, auto-translated subtitles on YouTube produce very bad results, so we wanted to see if we could do better. There is a lot of media in Russian that should be accessible to speakers of other languages and is not, because it is not translated. A high-quality automatic subtitling system would make content accessible without human translators having to spend many many hours. Our work on the ASR part of the pipeline will add to existing trained models, making more resources for those working with Russian speech data and ASR models. It will also help us complete part of the pipeline on the way to our overarching goal. 
 
 ### *Data:*
-- What kind of ``data`` will you be using? ``Describe the corpus``: genre, size, language, style, etc. Do you have the data? Will you acquire the data? How? Where will you ``store`` your data? 
 
-We will be using data from OpenSLR. It contains 98 hours of Russian speech data, all recorded in quiet environment with clear speech and no interference from background noise or music. We will download the data from the site [https://openslr.org/resources.php] and we will store it on our personal laptops or on Google Drive.
-
+We will be using data from OpenSLR. It contains 98 hours of Russian speech data from public domain audiobooks. The audio is all recorded in quiet environment with clear speech and no interference from background noise or music. We will download the data from the site [https://openslr.org/96/] and we will store it on our personal laptops or on Google Drive.
 
 ### *Engineering:*
 - What ``computing infrastructure`` will you use? Personal computers? Google Colab? Google Cloud TPUs?
