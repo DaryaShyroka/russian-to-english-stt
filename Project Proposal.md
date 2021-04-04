@@ -8,13 +8,13 @@ Describe your proposed project. Your should include the following information an
 (e.g., sentiment analysis, machine translation, language generation, style transfer, etc.?). Please explain ``what the task entails`` 
 (e.g., taking in as input a sequence of text from a source language and turning it into a sequence of sufficiently equivalent meaning in target language). 
 
-The problem we will be working on is automatic subtitle generation. We will be trying out two approaches:  
+Originally, we wanted to create an end-to-end system for automatic subtitle generation. We wanted to try out two approaches:  
 
 1) Training an ASR system to first convert the Russian audio to Russian text, and then doing Neural Machine Translation on the Russian text to translate it to English.
 
-- We want to create an automatic subtitle generation system, but we don't have enough time to create the end-to-end system, so we will start with the first step.
-Note: Peter said that we should probably do one of the pipeline steps, ie the Russian audio to Russian text using OpenSLR (because we won't have enough time) 
-- would need 10,000 hours of audio for an End-to-End system.
+2) Training a system to generate English subtitles straight from the Russian audio, without translating it in between.
+
+However, we would need a lot of time to train such a system. We would also need about 10,000 hours of clean audio, which we do not have. Given the time constraints on this project, and the lack of sufficient audio, we will not be attempting to complete the full end-to-end pipeline. Instead, we plan to do the first step, which will be Russian Automatic Speech Recognition. This task will entain taking clean Russian audio from OpenSLR and outputting text that corresponds to the words in the audio. In the future beyond this course, we intend to continue this project and complete the full pipeline.
 
 ### *Motivation and Contributions/Originality:*
 - ``What is the motivation for pursuing this project?`` In other words, ``why is the project important``. This could be because this is a ``(relatively) new problem`` where you are using an existing method on (e.g., translating tweets where the language is noisy and doesn't usually obey `standard` rules). This could also be because the problem is ``timely`` (e.g., carrying out ``sentiment analysis on COVID-19`` data, given the negative impact of the pandemic). Further, this could be because the problem is ``socially motivated`` and/or ``remains unsolved`` (e.g., ``toxic`` and/or ``racist`` comments on social media, given their pervasively harmful impact).  
