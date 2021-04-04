@@ -16,7 +16,7 @@ The motivation for this project is to improve existing automatic subtitling syst
 
 ### *Data:*
 
-We will be using data from OpenSLR. It contains 98 hours of Russian speech data from public domain audiobooks. The audio is all recorded in quiet environment with clear speech and no interference from background noise or music. We will download the data from the site [https://openslr.org/96/] and we will store it on our personal laptops or on Google Drive.
+We will be using data from OpenSLR. It contains 98 hours of Russian speech data from public domain audiobooks. The audio is all recorded in quiet environment with clear speech and no interference from background noise or music. We will download the data from the site https://openslr.org/96/ and we will store it on our personal laptops or on Google Drive.
 
 ### *Engineering:*
 - What ``computing infrastructure`` will you use? Personal computers? Google Colab? Google Cloud TPUs?
