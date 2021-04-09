@@ -8,4 +8,4 @@ Speech Overview slides: https://github.ubc.ca/MDS-CL-2020-21/COLX_585_trends_stu
 
 ### Our Dataset
 
-Link to our Dataset on Google Drive: 
+Link to our Dataset on Google Drive: https://drive.google.com/drive/folders/1TtjO3zgRvN_ZrrL-gf1buT0AUSZ5gZc7?usp=sharing
