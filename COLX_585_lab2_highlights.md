@@ -41,3 +41,20 @@ Peter is also going to upload the topics of the Lab.
 https://huggingface.co/anton-l/wav2vec2-large-xlsr-53-russian
 
 It reported a WER of 17.39%.
+
+
+
+
+1. How to load our data, and preprocess it to hugging face colab notebook?
+
+2. Can we fine tune the already trained commonvoice Russian data set?
+  
+3. Why did Peter recommend OpenSLR data instead of Common Voice? 
+
+4. Why a language model? when to apply it?
+
+5. we want to explore three options:
+  a. hugging face fine tuned model evaluated on open slr data
+  b. hugging face train further on open slr data (combining both data set)
+  c. plain XlsR and train on open slr
+  d. train vanila slr on combined data
