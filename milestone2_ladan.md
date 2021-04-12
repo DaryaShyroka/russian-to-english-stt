@@ -8,7 +8,7 @@
 rubric={reasoning:5,writing:3}
 
 
-We are going to perform Russian Automatic Speech Recognition following by translation to English. This takes clean Russian audio from OpenSLR and outputting text that corresponds to the words in the audio, then translating it to audio. We are going to explore Fairseq [[1]https://github.com/pytorch/fairseq/blob/master/examples/speech_to_text/docs/covost_example.md which is a recent model that can perform both steps (text creation and translation) together.]
+We are going to perform Russian Automatic Speech Recognition following by translation to English. This takes clean Russian audio from OpenSLR and outputting text that corresponds to the words in the audio, then translating it to audio. We are going to explore Fairseq [[1](https://github.com/pytorch/fairseq/blob/master/examples/speech_to_text/docs/covost_example.md which is a recent model that can perform both steps (text creation and translation) together.)]
 
 Discussion on the feedbacks received for Milestone 1:
 
@@ -20,7 +20,7 @@ Discussion on the feedbacks received for Milestone 1:
 
 - How will you be calculating WER?
 
-The WER is the word level of the Levenshtein distance, comparing to the origin of it where it was at the phoneme level. Using WER we can compare different systems also make improvements within one system. It is important to know that this metric do not provide any information on the nature of translation errors and we need to identify the main source(s) of error. Based on WER first we align the recognized word sequence with the reference (spoken) word sequence. Word error rate (WER) can be computed as: WER = (S + D + I) / N = (S + D + I) / (S + D + C) where S is the number of substitutions, D is the number of deletions, I is the number of insertions, C is the number of correct words, N is the number of words in the reference (N=S+D+C). WER's output is always a number between 0 and 1. [[2]https://huggingface.co/metrics/wer]
+The WER is the word level of the Levenshtein distance, comparing to the origin of it where it was at the phoneme level. Using WER we can compare different systems also make improvements within one system. It is important to know that this metric do not provide any information on the nature of translation errors and we need to identify the main source(s) of error. Based on WER first we align the recognized word sequence with the reference (spoken) word sequence. Word error rate (WER) can be computed as: WER = (S + D + I) / N = (S + D + I) / (S + D + C) where S is the number of substitutions, D is the number of deletions, I is the number of insertions, C is the number of correct words, N is the number of words in the reference (N=S+D+C). WER's output is always a number between 0 and 1. [[2](https://huggingface.co/metrics/wer)]
 
 
 - How will you be pre-processing the transcripts? Does Russian require any specific text processing procedures?
