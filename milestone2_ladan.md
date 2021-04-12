@@ -7,9 +7,6 @@
 ## Project Progress Report
 rubric={reasoning:5,writing:3}
 
-
-We are going to perform Russian Automatic Speech Recognition following by translation to English. This takes clean Russian audio from OpenSLR and outputting text that corresponds to the words in the audio, then translating it to audio. We are going to explore Fairseq [[1](https://github.com/pytorch/fairseq/blob/master/examples/speech_to_text/docs/covost_example.md)] which is a recent model that can perform both steps (text creation and translation) together.
-
 Discussion on the feedbacks received for Milestone 1:
 
 - Why do automatic subtitling systems do poorly for Russian?
@@ -40,8 +37,19 @@ This depends on the model we choose.
 The data consists of mixed female and male audios and there is no specific dialect.
 
 
+# Introduction
 
+Currently we are in the process of chosing the direction to go in with our project. Originally we were going to perform Russian Automatic Speech Recognition, as part of a pipeline in an end-to-end system for a Russian Speech to English text translation system. This would be Automatic Speech Recognition using XLSR-Wav2Vec2 fine-tuned on Russian speech data, followed by Machine Translation of the Russian transcriptions to English. Now, we are considering training a one-step Speech Translation system using Fairseq [[1](https://github.com/pytorch/fairseq/blob/master/examples/speech_to_text/docs/covost_example.md)] which is a recent model that can perform both steps (text creation and translation) together. We might compare the performance of these two models on a new dataset. We might also experiment with fine-tuning the vanilla XLSR-Wav2Vec2 model on a different Russian speech dataset (other than Common Voice, which it's already been fine-tuned on) to see how it performs. Finally, we are considering using subtitled movie/TV series data to see how a Speech Translation model might perform on a noisier dataset from a different domain.
 
+# Motivation
+
+Our motivation for the different directions are as follows:
+
+- If we used subtitled data, we would be creating a new dataset from a different domain that could be used for training future ASR and ST systems for Russian, which is a significant contribution because Russian does not have as many speech resources as English.
+- If we compare different models, we would be providing an analysis of which system works better.
+- If we compare a model on a new dataset, we would be providing an analysis of how an existing system works on new data, and discuss its effectiveness in new domains. 
+
+Overall, we will be learning to train a Machine Learning model to do a Speech Recognition and/or translation task, which would be a learning experience for all of us.
 
 # Summary of paper 1:
 
