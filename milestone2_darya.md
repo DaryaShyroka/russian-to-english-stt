@@ -1,8 +1,13 @@
 ### Data
 
-Originally, when we planned to do Russian ASR, we planned to use the OpenSLR Russian LibriSpeech (RuLS) dataset to fine-tune an XLSR-Wav2Vec2 model. 
+Originally, when we planned to do Russian ASR, we planned to use the OpenSLR Russian LibriSpeech (RuLS) dataset to fine-tune an XLSR-Wav2Vec2 model. The OpenSLR Russian LibriSpeech (RuLS) dataset contains 98 hours of Russian speech data from public domain audiobooks. The audio is all recorded in quiet environment with clear speech and no interference from background noise or music. The data is available on the site https://openslr.org/96/. 
+
 However, now that we are considering doing End-To-End Speech Translation using Fairseq, we might also use the CoVost dataset, which is 
-a multilingual speech-to-text translation corpus from 11 languages into English. We would use the data for Russian speech to English text. This dataset contains 10.2 hours of training data, 9.0 hours of development data, and 8.2 hours of test data.
+a multilingual speech-to-text translation corpus from 11 languages into English. We would use the data for Russian speech to English text. This dataset contains 10.2 hours of training data, 9.0 hours of development data, and 8.2 hours of test data. This is a dataset of read speech data - participants were recorded reading donated sentences. The transcriptions of these sentences were sent to translators to translate into English. There are some sentences that were read out by multiple different speakers, presumably to reduce overfitting to a single speaker. The data is available for download on https://github.com/facebookresearch/covost.
+
+We are also considering using subtitling data as training data. We currently have about 14 hours of a Russian show with manually written, gold standard English subtitles, which we could use as the training data. We already have the video files and subtitles downloaded as they were created by one of our team members a few years ago. We could also find more subtitle data online. In the case of subtitled data, we would need to extract the audio from the video files, and run a script that would separate the one large audio file into small audio files that match the timestamps in the subtitles. In this way, we would create a dataset which contains around one to two sentences in each audio file, with the target being the subtitle transcription. This would be similar to the OpenSLR RuLS dataset. However, this dataset would be much noisier than a read speech dataset. Speech in movies and TV is often combined with background noise and music. One of the interesting things we could investigate in this project would be the effect of noise in the dataset on speech recognition and how it affects WER.
+
+In each case, we will store the data on our personal laptops or on Google Drive.
 
 ### Previous Works
 
