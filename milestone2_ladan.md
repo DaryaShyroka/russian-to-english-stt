@@ -8,7 +8,7 @@
 rubric={reasoning:5,writing:3}
 
 
-We are going to perform Russian Automatic Speech Recognition following by translation to English. This takes clean Russian audio from OpenSLR and outputting text that corresponds to the words in the audio, then translating it to audio. We are going to explore Fairseq [[1](https://github.com/pytorch/fairseq/blob/master/examples/speech_to_text/docs/covost_example.md which is a recent model that can perform both steps (text creation and translation) together)]
+We are going to perform Russian Automatic Speech Recognition following by translation to English. This takes clean Russian audio from OpenSLR and outputting text that corresponds to the words in the audio, then translating it to audio. We are going to explore Fairseq [[1](https://github.com/pytorch/fairseq/blob/master/examples/speech_to_text/docs/covost_example.md)] which is a recent model that can perform both steps (text creation and translation) together.
 
 Discussion on the feedbacks received for Milestone 1:
 
