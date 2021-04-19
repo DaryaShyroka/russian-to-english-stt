@@ -1,6 +1,7 @@
 ## Project proposal
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### *Introduction:* 
 
 Originally, we wanted to create an end-to-end system for automatic subtitle generation. We wanted to try out two approaches:  
@@ -30,6 +31,8 @@ Research in the domain of Russian ASR has been of great interest for several dec
 Another example is this work https://www.isca-speech.org/archive/archive_papers/interspeech_2011/i11_3161.pdf by Alexey Karpov, Irina Kipyatkova and Andrey Ronzhin from Speech and Multimodal Interfaces Laboratory, St. Petersburg Institute for Informatics and
 Automation of the Russian Academy of Sciences (SPIIRAS), St. Petersburg, Russia. They used very large word-based vocabulary and 'novel' (for 2011) methods to organize of the lexicon and the language model. However, the model did not give as accurate WER scores compared to `Wav2Vec2-Large-XLSR-53-Russian`. (~ 56.1% WER).
 =======
+=======
+>>>>>>> 4528aa982fcc2809b4f0ef157008f9d22e48654a
 ### *Introduction:*
 
 Originally for this project we had planned to perform Russian Automatic Speech Recognition, as part of a pipeline in an end-to-end system for a Russian Speech to English text translation system. This would entail Automatic Speech Recognition using XLSR-Wav2Vec2 fine-tuned on Russian speech data, followed by Machine Translation of the Russian transcriptions to English. However, further reading has brought to our attention a one-step Speech Translation system by Fairseq [[1](https://github.com/pytorch/fairseq/blob/master/examples/speech_to_text/docs/covost_example.md)] which is a very recent model that can perform both steps (text creation and translation) in an end-to-end model. We will compare the performance of these two models on a new dataset. We will also experiment with fine-tuning the vanilla XLSR-Wav2Vec2 model on a different Russian speech dataset (other than Common Voice, which it's already been fine-tuned on) to see how it performs. Finally, we are considering using subtitled movie/TV series data to see how a Speech Translation model might perform on a noisier dataset from a different domain.
@@ -75,7 +78,10 @@ Considering the recency of the XSLR Wav2Vec2 architecture, there are not yet man
 Extending the domain from ASR to speech translation (ST), we see Facebook AI Research's very new Speech-to-Text modelling system, as described in Wang et. al [[5] (https://arxiv.org/abs/2007.10310)] which implements an end-to-end multilingual ST system using the CoVoST project datasets. It uses two Transformer encoder-decoder architectures for ASR followed by MT. While the WER scores for Russian to English (31.4%) are not as stellar as those seen in dedicated ASR models, this is still a novel approach to speech translation and is worth exploring in greater depth.
 
 We hope to achieve comparable results in our project.
+<<<<<<< HEAD
 >>>>>>> cc8e312be9b3067c947e8c90e645ab679dcac0b4
+=======
+>>>>>>> 4528aa982fcc2809b4f0ef157008f9d22e48654a
 
 ### *Evaluation:*
 
@@ -86,6 +92,7 @@ We will calculate WER as follows:
 Word Error Rate = (Substitutions + Insertions + Deletions) / Number of Words Spoken
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Substitutions are anytime a word gets replaced (for example, “twinkle” is transcribed as “crinkle”)
 Insertions are anytime a word gets added that wasn’t said (for example, “trailblazers” becomes “tray all blazers”)
 Deletions are anytime a word is omitted from the transcript (for example, “get it done” becomes “get done”)
@@ -94,11 +101,16 @@ source: https://www.rev.ai/blog/how-to-calculate-word-error-rate/
 
 ### *Conclusion (optional):*
 =======
+=======
+>>>>>>> 4528aa982fcc2809b4f0ef157008f9d22e48654a
 Substitutions are anytime a word gets replaced (for example, “twinkle” is transcribed as “crinkle”).
 Insertions are anytime a word gets added that wasn’t said (for example, “trailblazers” becomes “tray all blazers”).
 Deletions are anytime a word is omitted from the transcript (for example, “get it done” becomes “get done”).
 
 ### *Conclusion:*
+<<<<<<< HEAD
 >>>>>>> cc8e312be9b3067c947e8c90e645ab679dcac0b4
+=======
+>>>>>>> 4528aa982fcc2809b4f0ef157008f9d22e48654a
 
 The ultimate goal is to create a tool that automatically translates Russian speech to English text in the future. If we succeed with the ASR portion, this project will be a great starting point for that goal.
