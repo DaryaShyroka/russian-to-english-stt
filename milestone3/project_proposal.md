@@ -1,46 +1,14 @@
 ## Project proposal
 
-<<<<<<< HEAD
-### *Introduction:* 
-
-Originally, we wanted to create an end-to-end system for automatic subtitle generation. We wanted to try out two approaches:  
-
-1) Training an ASR system to first convert the Russian audio to Russian text, and then doing Neural Machine Translation on the Russian text to translate it to English.
-
-2) Training a system to generate English subtitles straight from the Russian audio, without translating it in between.
-
-However, we would need a lot of time and data to train such a system. We would need about 10,000 hours of clean audio, which we do not have. Given the time constraints on this project, and the lack of sufficient audio, we will not be attempting to complete the full end-to-end pipeline. *Instead, we plan to do the first step, which will be Russian Automatic Speech Recognition*. This task will entail taking clean Russian audio from OpenSLR and outputting text that corresponds to the words in the audio. In the future beyond this course, we intend to continue this project and complete the full pipeline.
-
-### *Motivation and Contributions/Originality:*
-
-The motivation for this project is to improve existing automatic subtitling systems. Currently, auto-translated subtitles on YouTube produce very poor results, so we wanted to see if we could do better. There is a lot of media in Russian that should be accessible to speakers of other languages and is not, because it is not translated. A high-quality automatic subtitling system would make content accessible without human translators having to spend many many hours. Our work on the ASR part of the pipeline will add to existing trained models, making more resources for those working with Russian speech data and ASR models. It will also help us complete part of the pipeline on the way to our overarching goal. 
-
-### *Data:*
-
-We will be using data from the OpenSLR organization. The OpenSLR Russian LibriSpeech (RuLS) dataset contains 98 hours of Russian speech data from public domain audiobooks. The audio is all recorded in quiet environment with clear speech and no interference from background noise or music. We will download the data from the site https://openslr.org/96/ and we will store it on our personal laptops or on Google Drive.
-
-### *Engineering:*
-
-In this project we use Google Colab as our primary computing infrastructure for developing models. The datasets are stored on a shared personal Google Drive folder. We use the PyTorch framework. A primary objective of this project is to investigate the performances of two cutting-edge ASR/speech translation systems. On one hand we have the Fairseq Speech2Text model which follows the end-to-end paradigm of converting source language audio to target language text in one model without intermediate representations of text. On the other hand we use Huggingface's pre-trained cross-lingual speech recognition model `Wav2Vec2-Large-XLSR-53-Russian`, which is based on the XLSR `Wav2Vec2forCTC` model, forming one half of a speech translation pipeline. The other half of the pipeline involves a manually trained Russian text to English text translation model, which takes the output of the ASR model as its input.
-
-### *Previous Works (minimal):*
-
-Research in the domain of Russian ASR has been of great interest for several decades now. The history of Russian ASR goes as far back as the Soviet Union with KGB backing for speech recognition research. A descendent of this state-backed research is the organization known in the West as [SpeechPro](https://www.wikiwand.com/ru/%D0%A6%D0%B5%D0%BD%D1%82%D1%80_%D1%80%D0%B5%D1%87%D0%B5%D0%B2%D1%8B%D1%85_%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B9) (AKA., the Speech Technology Centre), which is regarded as the best solution on the market for Russian ASR [[1](https://doi.org/10.1007/978-3-319-23132-7_29), [2](https://doi.org/10.1007/978-3-319-43958-7_13)]. Research in this domain has really skyrocketed only within the last 5-6 years, so it is still a hotbed for novel techniques with much room for improvement. Some notable implementations in recent years have been based on Mozilla's/Baidu's DeepSpeech model [[3](https://github.com/GeorgeFedoseev/DeepSpeech), [4](http://ceur-ws.org/Vol-2267/470-474-paper-90.pdf)]. Considering how new the XSLR Wav2Vec2 architecture is, there are not yet many publications illustrating the cutting edge applications of this model on the Russian language yet. The most notable resource is Huggingface's pre-trained cross-lingual speech recognition model `Wav2Vec2-Large-XLSR-53-Russian` which boasts a word error rate of 17.39% on the Common Voice Russian test set, which is comparable to other SOTA implementations. We hope to achieve comparable results in our project.
-
-Another example is this work https://www.isca-speech.org/archive/archive_papers/interspeech_2011/i11_3161.pdf by Alexey Karpov, Irina Kipyatkova and Andrey Ronzhin from Speech and Multimodal Interfaces Laboratory, St. Petersburg Institute for Informatics and
-Automation of the Russian Academy of Sciences (SPIIRAS), St. Petersburg, Russia. They used very large word-based vocabulary and 'novel' (for 2011) methods to organize of the lexicon and the language model. However, the model did not give as accurate WER scores compared to `Wav2Vec2-Large-XLSR-53-Russian`. (~ 56.1% WER).
-=======
 ### *Introduction:*
 
-Originally for this project we had planned to perform Russian Automatic Speech Recognition, as part of a pipeline in an end-to-end system for a Russian Speech to English text translation system. This would entail Automatic Speech Recognition using XLSR-Wav2Vec2 fine-tuned on Russian speech data, followed by Machine Translation of the Russian transcriptions to English. However, further reading has brought to our attention a one-step Speech Translation system by Fairseq [[1](https://github.com/pytorch/fairseq/blob/master/examples/speech_to_text/docs/covost_example.md)] which is a very recent model that can perform both steps (text creation and translation) in an end-to-end model. We will compare the performance of these two models on a new dataset. We will also experiment with fine-tuning the vanilla XLSR-Wav2Vec2 model on a different Russian speech dataset (other than Common Voice, which it's already been fine-tuned on) to see how it performs. Finally, we are considering using subtitled movie/TV series data to see how a Speech Translation model might perform on a noisier dataset from a different domain.
+Originally for this project we had planned to perform Russian Automatic Speech Recognition, as part of a pipeline in an end-to-end system for a Russian Speech to English text translation system. This would entail Automatic Speech Recognition using XLSR-Wav2Vec2 fine-tuned on Russian speech data, followed by Machine Translation of the Russian transcriptions to English. We also intended to fine-tune the vanilla XLSR-Wav2Vec2 model on a different Russian speech dataset (other than Common Voice, which it's already been fine-tuned on) to see how it performs. We were going to use the OpenSLR dataset from Librispeech to do this, however since it is not in the same format as Common Voice, it would take really long to fix the format and we don't think this would have added much value, so we decided to stick with Common Voice. Additionally, unanticipated challenges arose through working with speech data, so we will likely need to reduce our original scope. 
+
+We have experiemented with fine-tuning an XLSR-Wav2Vec2 model on Common Voice Russian speech data following the tutorial on Turkish data. We have had to change some of the functions in the tutorial to allow it to work with Russian data, and we had to get more RAM and a faster processor in order to be able to run the notebook since the Russian dataset is very large. Following this week, once we get the Russian data working with the code given in the HuggingFace XLSR-Wav2Vec2 tutorial, we intend to use the fine-tuned model in a pipeline with a Machine Translation model to translate the output of XLSR-Wav2Vec2 from Russian to English, and report on the results.
 
 ### *Motivation:*
 
-Our motivation for the different directions are as follows:
-
-- If we used subtitled data, we would be creating a new dataset from a different domain that could be used for training future ASR and ST systems for Russian, which is a significant contribution because Russian does not have as many speech resources as English.
-- If we compare different models we would be providing an analysis of which system works better for our applications, which is a novel endeavour.
-- If we compare a model on a new dataset, we would be providing an analysis of how an existing system works on new data, and discuss its effectiveness in new domains. 
+Our motivation for our End-to-end pipeline approach is to see how well a model trained on XLSR-Wav2Vec2 can do on basic ASR (Russian audio to Russian text), to see if we can get a better WER score than the fine-tuned Russian-53 model. We also want to see if the silver-standard (model output) transcriptions do well in a machine translation model, and see if the final output is at all correct and usable. If we can achieve good results in both ASR and MT, we can use Watson TTS or any other (better?) word to speech models to build a `Russian speech to English speech` system. The idea for this project was motivated by `ili - instant translation device for travelers` https://iamili.com/us/#:~:text=ili%20is%20made%20for%20your,ili%20to%20anywhere%20you%20want. So, this is our attempt to build something similar (or better?).
 
 Overall, we will be learning to train a Machine Learning model to do a Speech Recognition and/or translation task, which would be a learning experience for all of us.
 
@@ -75,7 +43,6 @@ Considering the recency of the XSLR Wav2Vec2 architecture, there are not yet man
 Extending the domain from ASR to speech translation (ST), we see Facebook AI Research's very new Speech-to-Text modelling system, as described in Wang et. al [[5] (https://arxiv.org/abs/2007.10310)] which implements an end-to-end multilingual ST system using the CoVoST project datasets. It uses two Transformer encoder-decoder architectures for ASR followed by MT. While the WER scores for Russian to English (31.4%) are not as stellar as those seen in dedicated ASR models, this is still a novel approach to speech translation and is worth exploring in greater depth.
 
 We hope to achieve comparable results in our project.
->>>>>>> cc8e312be9b3067c947e8c90e645ab679dcac0b4
 
 ### *Evaluation:*
 
@@ -85,20 +52,26 @@ We will calculate WER as follows:
 
 Word Error Rate = (Substitutions + Insertions + Deletions) / Number of Words Spoken
 
-<<<<<<< HEAD
-Substitutions are anytime a word gets replaced (for example, “twinkle” is transcribed as “crinkle”)
-Insertions are anytime a word gets added that wasn’t said (for example, “trailblazers” becomes “tray all blazers”)
-Deletions are anytime a word is omitted from the transcript (for example, “get it done” becomes “get done”)
-
-source: https://www.rev.ai/blog/how-to-calculate-word-error-rate/
-
-### *Conclusion (optional):*
-=======
 Substitutions are anytime a word gets replaced (for example, “twinkle” is transcribed as “crinkle”).
 Insertions are anytime a word gets added that wasn’t said (for example, “trailblazers” becomes “tray all blazers”).
 Deletions are anytime a word is omitted from the transcript (for example, “get it done” becomes “get done”).
 
+In our project we will use `load_metric` from `datasets`. 
+
+First we define the metric as:
+
+`wer_metric = load_metric("wer")`
+
+Then, we will call it's `compute()` function within a separate function for calculating `WER`. 
+
+### *Challenges:*
+
+Some challenges we faced this week when trying to train the model were as follows:
+
+- Modifying the OpenSLR data to be compatible with the HuggingFace Notebook was too difficult and would take too much time, so we used the Common Voice dataset instead, which worked with the notebook seamlessly.
+- The Russian dataset had some configurations that were different from the Turkish dataset. We had to modify the `speech_file_to_array_fn` to work with the batches in the dataset. We were also unable to work with batch sizes greater than 1, which made the data loading and training really slow. (finally we were able to use larger batch sizes)
+- The notebook would often crash due to RAM shortage. We had to upgrade to Colab Pro in order to increase RAM, and once we did that, we still ran out of disk space when using a CPU or GPU runtime. Finally, the TPU runtime had enough disk space to load all of the data and start training, but training on CPU was way too slow (an estimated 279 hours), and we could not access the GPU in a TPU runtime. Then, we attempted to set the device to TPU for the model in an attempt to reduce training time. We were unfamiliar with the parallelization of TPUs and tried to train using one core, which resulted in a memory error for that TPU core. We are currently investigating how to parallelize our dataset and the training onto multiple cores.
+
 ### *Conclusion:*
->>>>>>> cc8e312be9b3067c947e8c90e645ab679dcac0b4
 
 The ultimate goal is to create a tool that automatically translates Russian speech to English text in the future. If we succeed with the ASR portion, this project will be a great starting point for that goal.
