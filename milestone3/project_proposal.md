@@ -8,13 +8,9 @@ We have experimented with fine-tuning an XLSR-Wav2Vec2 model on Common Voice Rus
 
 ### *Motivation:*
 
-Our motivation for the different directions are as follows:
+Our motivation for an End-to-end pipeline approach is to see how well a model trained on XLSR-Wav2Vec2 can do on basic ASR (Russian audio to Russian text), to see if we can get a better WER score than the fine-tuned Russian-53 model. We also want to see if the silver-standard (model output) transcriptions do well in a machine translation model, and see if the final output is at all correct and usable. If we can achieve good results in both ASR and MT, we can use Watson TTS or any other (better?) word to speech models to build a `Russian speech to English speech` system. The idea for this project was motivated by [`ili - instant translation device for travelers`](https://iamili.com/us/#:~:text=ili%20is%20made%20for%20your,ili%20to%20anywhere%20you%20want).
 
-- If we used subtitled data, we would be creating a new dataset from a different domain that could be used for training future ASR and ST systems for Russian, which is a significant contribution because Russian does not have as many speech resources as English.
-- If we compare different models we would be providing an analysis of which system works better for our applications, which is a novel endeavour.
-- If we compare a model on a new dataset, we would be providing an analysis of how an existing system works on new data, and discuss its effectiveness in new domains. 
-
-Overall, we will be learning to train a Machine Learning model to do a Speech Recognition and/or translation task, which would be a learning experience for all of us.
+Overall, we will learn to train a Machine Learning model to do a Speech Recognition and/or translation task, which would be a learning experience for all of us.
 
 ### *Data:*
 
@@ -53,6 +49,14 @@ Word Error Rate = (Substitutions + Insertions + Deletions) / Number of Words Spo
 Substitutions are anytime a word gets replaced (for example, “twinkle” is transcribed as “crinkle”).
 Insertions are anytime a word gets added that wasn’t said (for example, “trailblazers” becomes “tray all blazers”).
 Deletions are anytime a word is omitted from the transcript (for example, “get it done” becomes “get done”).
+
+In our project we will use `load_metric` from `datasets`. 
+
+First we define the metric as:
+
+`wer_metric = load_metric("wer")`
+
+Then, we will call it's `compute()` function within a separate function for calculating `WER`.
 
 ### *Challenges:*
 
