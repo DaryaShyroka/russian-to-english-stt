@@ -54,6 +54,14 @@ Substitutions are anytime a word gets replaced (for example, “twinkle” is tr
 Insertions are anytime a word gets added that wasn’t said (for example, “trailblazers” becomes “tray all blazers”).
 Deletions are anytime a word is omitted from the transcript (for example, “get it done” becomes “get done”).
 
+### *Challenges:*
+
+Some challenges we faced this week when trying to train the model were as follows:
+
+- Modifying the OpenSLR data to be compatible with the HuggingFace Notebook was too difficult and would take too much time, so we used the Common Voice dataset instead, which worked with the notebook off-the-shelf.
+- The Russian dataset had some configurations that were different from the Turkish dataset. We had to modify the `speech_file_to_array_fn` to work with the batches in the dataset. We were also unable to work with batch sizes greater than 1, which made the data loading and training really slow. (finally we were able to use larger batch sizes)
+- The notebook would often crash due to RAM shortage. We had to upgrade to Colab Pro in order to increase RAM, and once we did that, we still ran out of disk space when using a CPU or GPU runtime. Finally, the TPU runtime had enough disk space to load all of the data and start training, but we were unable to leverage the TPU cores for training and inadvertently trained on CPU; training on CPU was too slow (an estimated 279 hours). Then, we attempted to set the device to TPU for the model in an attempt to reduce training time. We were unfamiliar with the parallelization of TPUs and tried to train using one core, which resulted in a memory error for that TPU core. We are currently investigating how to parallellize our dataset and the training onto multiple cores.
+
 ### *Conclusion:*
 
 The ultimate goal is to create a tool that automatically translates Russian speech to English text in the future. If we succeed with the ASR portion, this project will be a great starting point for that goal.
