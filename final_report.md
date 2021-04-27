@@ -61,7 +61,7 @@ Some challenges we faced this week when trying to train the model were as follow
 - The notebook would often crash due to RAM shortage. We had to upgrade to Colab Pro in order to increase RAM, and once we did that, we still ran out of disk space when using a CPU or GPU runtime. Finally, the TPU runtime had enough disk space to load all of the data and start training, but training on CPU was way too slow (an estimated 279 hours), and we could not access the GPU in a TPU runtime. Then, we attempted to set the device to TPU for the model in an attempt to reduce training time. We were unfamiliar with the parallelization of TPUs and tried to train using one core, which resulted in a memory error for that TPU core. We are currently investigating how to parallelize our dataset and the training onto multiple cores.
 
 
-## *Experiments:*
+## *Experiments and Results:*
 
 Once we were able to train our model, we performed several experiments.
 
@@ -69,6 +69,8 @@ Once we were able to train our model, we performed several experiments.
 - At 500 examples, the model started making predictions, but they were mostly jumbled and the spaces were in the wrong places. WER:
 - At 1000, WER:
 - At 4100, WER: around 0.44.
+
+Since the training of the model for 4100 examples took around 10 hours, we were only able to run the model 3 times, so we had a very limited chance to explore different hyperparameters. We only tried to chance the logging time (from 400 to 100), and the learning rate from 3e-4 to 3e-3. 
 
 - Analysis: our WER score is low because we were not able to train the model on enough data. If we could have trained the model on all of the data available in the Common Voice Russian dataset, I'm sure the WER would have gone down further. (future work)
 
@@ -97,6 +99,31 @@ Step 	Training Loss 	Validation Loss 	Wer 	Runtime 	Samples Per Second
 2000 	0.147200 	0.427765 	0.504713 	148.163300 	6.209000
 2100 	0.135800 	0.427152 	0.502555 	149.922600 	6.136000
 2200 	0.133300 	0.411125 	0.496309 	169.383000 	5.431000
+2300                      0.489743
+2400
+2500
+2600
+2700
+2800
+2900
+3000
+3100
+3200
+3300
+3400
+3500
+3600
+3700
+3800
+3900
+4000
+4100
+
+The following graph depicts how the WER improves every 100 iterations:
+
+![WER decrease graph](https://github.ubc.ca/sshank00/COLX_585_Project/edit/darya/step_wer.png "WER decrease per 100 utterances")
+
+We see a drop starting from about 800, when the WER first dips below 100%. Then, we observe a sharp decline until around 1100, where it continues to decreases, but at a much slower rate. After 2000, the rate of decrease is very small. 
 
 
 ### *Future Work:*
