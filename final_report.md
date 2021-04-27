@@ -107,6 +107,9 @@ Additionally, to make sure that we get a sensible output from a Machine Translat
 
 Another thing that could help correct the output of the model, in the case of a letter in a word being misrecognized (happens to vowels often), would be to first apply a russian grammatical error correction model to the output before passing it to the machine translation model. An example could be https://github.com/grammatical/magec-wnut2019/tree/master/models. This way, any evident typos are likely to be corrected, and the machine translation model will have to deal with much less OOV words.
 
+https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00251/43532/Grammar-Error-Correction-in-Morphologically-Rich
+GItHub Typo Corpus https://neurohive.io/ru/datasety/github-typo-corpus-multiyazychnyj-dataset-s-opechatkami/ (to train our own GEC system)
+
 ### *Conclusion:*
 
 The ultimate goal is to create a tool that automatically translates Russian speech to English text in the future. If we succeed with the ASR portion, this project will be a great starting point for that goal.
