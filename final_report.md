@@ -2,7 +2,7 @@
 
 ### *Introduction:*
 
-For this project, we plan to perform Russian Automatic Speech Recognition, as part of a pipeline in an end-to-end system for a Russian Speech to English text translation system. This would entail Automatic Speech Recognition using XLSR-Wav2Vec2 fine-tuned on Russian speech data, followed by Machine Translation of the Russian transcriptions to English. We also intended to fine-tune the vanilla XLSR-Wav2Vec2 model on a different Russian speech dataset (other than Common Voice, which it's already been fine-tuned on) to see how it performs. We were going to use the OpenSLR dataset from Librispeech to do this, however since it is not in the same format as Common Voice, it would take really long to fix the format and we don't think this would have added much value, so we decided to stick with Common Voice. Additionally, unanticipated challenges arose through working with speech data, so we will likely need to reduce our original scope. 
+For this project, we performed Russian Automatic Speech Recognition, as part of a pipeline in an end-to-end system for a Russian Speech to English text translation system. This would entail Automatic Speech Recognition using XLSR-Wav2Vec2 fine-tuned on Russian speech data, followed by Machine Translation of the Russian transcriptions to English. We also intended to fine-tune the vanilla XLSR-Wav2Vec2 model on a different Russian speech dataset (other than Common Voice, which it's already been fine-tuned on) to see how it performs. We were going to use the OpenSLR dataset from Librispeech to do this, however since it is not in the same format as Common Voice, it would take really long to fix the format and we don't think this would have added much value, so we decided to stick with Common Voice. Additionally, unanticipated challenges arose through working with speech data, so we will likely need to reduce our original scope. 
 
 We have experiemented with fine-tuning an XLSR-Wav2Vec2 model on Common Voice Russian speech data following the tutorial on Turkish data (https://colab.research.google.com/github/patrickvonplaten/notebooks/blob/master/Fine_Tune_XLSR_Wav2Vec2_on_Turkish_ASR_with_%F0%9F%A4%97_Transformers.ipynb#scrollTo=ZJy7p04j78c3). We have had to change some of the functions in the tutorial to allow it to work with Russian data, and we had to get more RAM and a faster processor in order to be able to run the notebook, since the Russian dataset is very large. Following this week, once we get the Russian data working with the code given in the HuggingFace XLSR-Wav2Vec2 tutorial, we intend to use the fine-tuned model in a pipeline with a Machine Translation model to translate the output of XLSR-Wav2Vec2 from Russian to English, and report on the results.
 
@@ -59,6 +59,46 @@ Some challenges we faced this week when trying to train the model were as follow
 - Modifying the OpenSLR data to be compatible with the HuggingFace Notebook was too difficult and would take too much time, so we used the Common Voice dataset instead, which worked with the notebook seamlessly.
 - The Russian dataset had some configurations that were different from the Turkish dataset. We had to modify the `speech_file_to_array_fn` to work with the batches in the dataset. We were also unable to work with batch sizes greater than 1, which made the data loading and training really slow. (finally we were able to use larger batch sizes)
 - The notebook would often crash due to RAM shortage. We had to upgrade to Colab Pro in order to increase RAM, and once we did that, we still ran out of disk space when using a CPU or GPU runtime. Finally, the TPU runtime had enough disk space to load all of the data and start training, but training on CPU was way too slow (an estimated 279 hours), and we could not access the GPU in a TPU runtime. Then, we attempted to set the device to TPU for the model in an attempt to reduce training time. We were unfamiliar with the parallelization of TPUs and tried to train using one core, which resulted in a memory error for that TPU core. We are currently investigating how to parallelize our dataset and the training onto multiple cores.
+
+
+## *Experiments:*
+
+Once we were able to train our model, we performed several experiments.
+
+- At first, we ran the model on only 100 training examples, 20 validation examples, and 20 test examples. We got a WER score of 100%, and the predictions made by the model were all blank (just series of spaces). 
+- At 500 examples, the model started making predictions, but they were mostly jumbled and the spaces were in the wrong places. WER:
+- At 1000, WER:
+- At 4100, WER: around 0.44.
+
+- Analysis: our WER score is low because we were not able to train the model on enough data. If we could have trained the model on all of the data available in the Common Voice Russian dataset, I'm sure the WER would have gone down further. (future work)
+
+- Strategies for future: get more disk space (somehow), parallelize on TPUs, save checkpoints of a pretrained model, and train the pretrained model on more data
+
+2200 training examples:
+
+Step 	Training Loss 	Validation Loss 	Wer 	Runtime 	Samples Per Second
+100 	9.585400 	3.515458 	1.000000 	144.756300 	6.356000
+200 	3.274000 	3.192971 	1.000000 	144.127000 	6.383000
+300 	3.190300 	3.173416 	1.000000 	144.128500 	6.383000
+400 	3.200600 	3.151139 	1.000000 	145.240800 	6.334000
+500 	3.194400 	3.159762 	1.000000 	144.020300 	6.388000
+600 	3.187700 	3.163607 	1.000000 	147.165000 	6.251000
+700 	3.093700 	3.015399 	1.000000 	144.976100 	6.346000
+800 	1.972000 	1.006928 	0.902783 	146.763400 	6.269000
+900 	0.813200 	0.633170 	0.773992 	145.801300 	6.310000
+1000 	0.585600 	0.524344 	0.686201 	148.567800 	6.192000
+1100 	0.423600 	0.455967 	0.615786 	147.301000 	6.246000
+1200 	0.340900 	0.467169 	0.623623 	148.500000 	6.195000
+1300 	0.300100 	0.430126 	0.574787 	149.490400 	6.154000
+1400 	0.264300 	0.429314 	0.567973 	148.749400 	6.185000
+1500 	0.239800 	0.415103 	0.555821 	148.488300 	6.196000
+1600 	0.211100 	0.416707 	0.549461 	148.965300 	6.176000
+1700 	0.178100 	0.404860 	0.529131 	149.246800 	6.164000
+1800 	0.181800 	0.416068 	0.522203 	150.508700 	6.113000
+1900 	0.163800 	0.426525 	0.515957 	150.701700 	6.105000
+2000 	0.147200 	0.427765 	0.504713 	148.163300 	6.209000
+2100 	0.135800 	0.427152 	0.502555 	149.922600 	6.136000
+2200 	0.133300 	0.411125 	0.496309 	169.383000 	5.431000
 
 ### *Conclusion:*
 
