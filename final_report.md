@@ -72,8 +72,6 @@ Once we were able to train our model, we performed several experiments.
 
 - Analysis: our WER score is low because we were not able to train the model on enough data. If we could have trained the model on all of the data available in the Common Voice Russian dataset, I'm sure the WER would have gone down further. (future work)
 
-- Strategies for future: get more disk space (somehow), parallelize on TPUs, save checkpoints of a pretrained model, and train the pretrained model on more data
-
 2200 training examples:
 
 Step 	Training Loss 	Validation Loss 	Wer 	Runtime 	Samples Per Second
@@ -99,6 +97,15 @@ Step 	Training Loss 	Validation Loss 	Wer 	Runtime 	Samples Per Second
 2000 	0.147200 	0.427765 	0.504713 	148.163300 	6.209000
 2100 	0.135800 	0.427152 	0.502555 	149.922600 	6.136000
 2200 	0.133300 	0.411125 	0.496309 	169.383000 	5.431000
+
+
+### *Future Work:*
+
+In order to improve our model, we would first of all need to improve the WER score. In order to do this, we would need to train the model on all of the data available. Thus, the first thing we would do is figure out how to get more disk space on Google Colab (or get access to a supercomputer), parallelize the data and model to run on multiple TPU cores, or save checkpoints of a pretrained model, and then train the pretrained model on more data (train in batches).
+
+Additionally, to make sure that we get a sensible output from a Machine Translation model, we could improve the output of the ASR model by adding a language model, so that the ASR model knows what a valid word in Russian is, and what is not. Currently, it is just guessing the sounds, and while it would likely perform well after more training (and guess words correctly), sometimes it gets the sounds correct but words wrong. With a language model, it would have different probabilities for outputs, and output that is a word would get a higher probability, so the model would output a real word. This would do better in a Machine Translation model, as those are trained to translate words, not sounds. 
+
+Another thing that could help correct the output of the model, in the case of a letter in a word being misrecognized (happens to vowels often), would be to first apply a russian grammatical error correction model to the output before passing it to the machine translation model. An example could be https://github.com/grammatical/magec-wnut2019/tree/master/models. This way, any evident typos are likely to be corrected, and the machine translation model will have to deal with much less OOV words.
 
 ### *Conclusion:*
 
