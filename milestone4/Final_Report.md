@@ -111,11 +111,16 @@ Since the training of the model for 4100 examples took around 10 hours, we were 
 
 The following graph depicts how the WER improves every 100 iterations:
 
+![WER declining over 4100 training iterations](./images/step_wer.png?raw=true)
+
 We see a drop starting from about 800, when the WER first dips below 100%. Then, we observe a sharp decline until around 1100, where it continues to decrease, but at a much slower rate. After 2000, the rate of decrease is very small, but WER does continue to decrease. We think that if we were able to train it on more data, we could get the WER down to less than 40%, but it is impossible to tell for sure. The lowest the WER got, as we can see from the table, is after 4100 iterations for a final WER score of 0.437.
 
 However, despite the WER being pretty high, we believe the model does pretty well at guessing the sounds, based on our manual inspection of the outputs. Russian is a very phonetic language, so words are generally spelled the way they sound. Since our model does not have a language model, it does not know what combinations of letters form a valid word. Thus, it is just guessing the letters based on the sounds it hears, and the spaces based on the silence in between. If it messes up some of the spelling, or where it places the spaces, the WER will go down. However, this does not mean that the model isn't doing well, as a simple repositioning of the space, or the fixing of a typo, would fix the issue.
 
 Other graphs:
+
+![Training loss declining over 4100 training iterations](./images/step_TrainingLoss.png?raw=true)
+![Validation loss declining over 4100 training iterations](./images/step_ValidationLoss.png?raw=true)
 
 Next, we passed the results from our final experiment (trained on XXX sentences with a WER of XXX) into the next step of our pipeline, which is the translation step. We divided this into two experiments: using a spell checker first, and not using a spell checker at all. The results were as follows: ## TODO
 
