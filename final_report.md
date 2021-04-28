@@ -17,11 +17,13 @@ Our motivation for our End-to-end pipeline approach is to see how well a model t
 
 Overall, we will be learning to train a Machine Learning model to do a Speech Recognition and/or translation task, which would be a learning experience for all of us.
 
-### *Data:* TODO - update
+### *Data:* TODO - edit
 
-We will use the Common Voice dataset for the Russian ASR. The Common Voice dataset for Russian contains 111 hours of Russian text read by native speakers, all recorded in a quiet environment. We are loading this data straight into the tutorial notebook using `load_dataset("common_voice", "ru")` with the appropriate train, validation and test splits, so we do not need to store the dataset anywhere. If we decide to use a Machine Translation model, we will likely use a pretrained model so we will not need a dataset for training, but we will store the outputs of the XLSR-Wav2Vec2 model in a file and use that as input to the MT model. 
+For the ASR model, we used the Russian Common Voice dataset. It contains 111 hours of Russian text read by native speakers, all recorded in a quiet environment. We are loading this data straight into the tutorial notebook using `load_dataset("common_voice", "ru")` with the appropriate train, validation and test splits, so we do not need to store the dataset anywhere. Due to disk space limitations, we used subsets of the data in our experiments, with the biggest being the first 4100 sentences in the training set, and 820 in the validation and test sets. 
 
-- We used the output of our ASR model as the input to the spell checker and the machine translation model.
+For the spell checker model and the Machine Translation model, we sued the outputs of the ASR model as inputs to the models. Thus, these were silver-standard audio transcriptions made by our pretrained model, with a WER score of 0.44. There were XXX sentences used. 
+
+(to improve the output of the MT model, we could have ran the Russian-53 model and used those outputs)
 
 ### *Engineering:* TODO - update, edit second paragraph if needed
 
