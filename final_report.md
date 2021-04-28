@@ -126,7 +126,13 @@ The following graph depicts how the WER improves every 100 iterations:
 
 ![WER decrease graph](https://github.ubc.ca/sshank00/COLX_585_Project/edit/darya/step_wer.png "WER decrease per 100 utterances")
 
-We see a drop starting from about 800, when the WER first dips below 100%. Then, we observe a sharp decline until around 1100, where it continues to decreases, but at a much slower rate. After 2000, the rate of decrease is very small. 
+We see a drop starting from about 800, when the WER first dips below 100%. Then, we observe a sharp decline until around 1100, where it continues to decrease, but at a much slower rate. After 2000, the rate of decrease is very small, but WER does continue to decrease. We think that if we were able to train it on more data, we could get the WER down to less than 40%, but it is impossible to tell for sure. 
+
+However, despite the WER being pretty high, we believe the model does pretty well at guessing the sounds, based on our manual inspection of the outputs. Russian is a very phonetic language, so words are generally spelled the way they sound. Since our model does not have a language model, it does not know what combinations of letters form a valid word. Thus, it is just guessing the letters based on the sounds it hears, and the spaces based on the silence in between. If it messes up some of the spelling, or where it places the spaces, the WER will go down. However, this does not mean that the model isn't doing well, as a simple repositioning of the space, or the fixing of a typo, would fix the issue. 
+
+
+Next, we passed the results from our final experiment (trained on XXX sentences with a WER of XXX) into the next step of our pipeline, which is the translation step. We divided this into two experiments: using a spell checker first, and not using a spell checker at all. The results were as follows:
+
 
 
 ### *Future Work:*
@@ -135,10 +141,10 @@ In order to improve our model, we would first of all need to improve the WER sco
 
 Additionally, to make sure that we get a sensible output from a Machine Translation model, we could improve the output of the ASR model by adding a language model, so that the ASR model knows what a valid word in Russian is, and what is not. Currently, it is just guessing the sounds, and while it would likely perform well after more training (and guess words correctly), sometimes it gets the sounds correct but words wrong. With a language model, it would have different probabilities for outputs, and output that is a word would get a higher probability, so the model would output a real word. This would do better in a Machine Translation model, as those are trained to translate words, not sounds. 
 
-Another thing that could help correct the output of the model, in the case of a letter in a word being misrecognized (happens to vowels often), would be to first apply a russian grammatical error correction model to the output before passing it to the machine translation model. An example could be https://github.com/grammatical/magec-wnut2019/tree/master/models. This way, any evident typos are likely to be corrected, and the machine translation model will have to deal with much less OOV words.
+Another thing that could help correct the output of the model, in the case of a letter in a word being misrecognized (happens to vowels often), would be to apply a russian grammatical error correction model to the output before passing it to the machine translation model, instead of a simple spell checker model that we used. An example could be https://github.com/grammatical/magec-wnut2019/tree/master/models. This way, any evident typos are likely to be corrected, and the machine translation model will have to deal with much less OOV words.
 
-https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00251/43532/Grammar-Error-Correction-in-Morphologically-Rich
-GItHub Typo Corpus https://neurohive.io/ru/datasety/github-typo-corpus-multiyazychnyj-dataset-s-opechatkami/ (to train our own GEC system)
+We looked into Grammatical Error Correction for Russian in ![Rozovskaya & Roth, 2019](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00251/43532/Grammar-Error-Correction-in-Morphologically-Rich). Rozovskaya & Roth, 2019, attempted to perform the correction of writing mistakes of the Russian language which is among the morphologically rich languages. They used minimal supervision methods as there was not a large amount of annotated training data available in Russian language. The corpus they used consisted of essays and papers written at university level by student who were learning Russian as a foreign language and students who had exposure to Russian at home. Two annotators were corrected the sentences and categorized the mistakes to different classes. The inter annotator agreement was calculated and the errors were also classified based on foreign and native speakers. Then they used phrase-based Machine Translation (MT) system. They then performed error analysis and compared the output of the MT with the annotated data. The result of the MT also was later annotated by annotators. They hope that the release of the annotated data can help the upcoming studies to have a better base for their performance.
+
 
 ### *Conclusion:*
 
