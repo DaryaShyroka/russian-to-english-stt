@@ -27,9 +27,9 @@ Research in this domain has really skyrocketed only within the last 5-6 years, s
 The most recent addition to the domain of ASR is the XSLR Wav2Vec2 architecture, which was released for public use only a few months ago. Considering its recency, there are not yet many publications illustrating the cutting-edge applications of this model on the Russian language yet. The most notable resource is Huggingface's pre-trained cross-lingual speech recognition model `Wav2Vec2-Large-XLSR-53-Russian` which boasts a word error rate of 17.39% on the CommonVoice Russian test set, which is comparable to other SOTA implementations.
 
 ## ***Data***
-For the ASR model, we used the Russian CommonVoice dataset. It contains 111 hours of Russian text read by native speakers, all recorded in a quiet environment. We are loading this data straight into the tutorial notebook using load_dataset("common_voice", "ru") with the appropriate train, validation and test splits, so we do not need to store the dataset anywhere. Due to disk space limitations, we used subsets of the data in our experiments, with the biggest being the first 4100 sentences in the training set, and 820 in the validation and test sets.
+For the ASR model, we used the [Russian CommonVoice dataset](https://commonvoice.mozilla.org/en/datasets). It contains 111 hours of Russian text read by native speakers, all recorded in a quiet environment. We are loading this data straight into the tutorial notebook using `load_dataset("common_voice", "ru")` with the appropriate train, validation and test splits, so we do not need to store the dataset anywhere. Due to disk space limitations, we used subsets of the data in our experiments, with the biggest being the first 4100 sentences in the training set, and 820 in the validation and test sets.
 
-For the spell checker model and the Machine Translation model, we used the outputs of the ASR model as inputs to the models. Thus, these were silver-standard audio transcriptions made by our pretrained model, with a WER score of 0.44. There were XXX sentences used.
+For the spell checker model and the machine translation model, we used the outputs of the ASR model as inputs to these models. Thus, these were silver-standard audio transcriptions made by our pretrained model, with a WER score of 0.399. There were 840 sentences used (the test sentences from the ASR model).
 
 ## ***Engineering***
 For this project we used Google Colab Pro as our primary computing infrastructure for developing models. As described in the `Data` section above, the datasets were loaded directly into the Colab runtime environment upon execution of the notebook and thus there was no need for a shared dataset storage solution like Google Drive. We used the PyTorch framework to develop our models, with extensive use of Huggingface's Transformer and Datasets libraries. A primary objective of this project was to investigate the performance of Huggingface's cutting-edge ASR system, [`Wav2Vec2-Large-XLSR-53-Russian`](https://huggingface.co/anton-l/wav2vec2-large-xlsr-53-russian), a pre-trained cross-lingual speech recognition model. This model formed one half of the speech translation pipeline.
@@ -52,15 +52,18 @@ We faced many hurdles through the course of this project, the majority of which 
 * Modifying the OpenSLR data to be compatible with the HuggingFace Notebook was too difficult and would take too much time, so we used the CommonVoice dataset instead, which worked with the notebook seamlessly.
 * The Russian dataset had some configurations that were different from the Turkish dataset. We had to modify the `speech_file_to_array_fn` to work with the batches in the dataset. We were also unable to work with batch sizes greater than 1, which made the data loading and training really slow. Only towards the last days of the project were we finally able to use larger batch sizes, enabling relatively faster training times.
 * The notebook would often crash due to RAM shortage. We had to upgrade to Colab Pro in order to increase RAM, and once we did that, we still ran out of disk space when using a CPU or GPU runtime. Finally, the TPU runtime had enough disk space to load all of the data and start training, but by default the TPU runtime trains on CPU which was much too slow (an estimated 279 hours). We attempted to set the device to TPU for the model in an attempt to reduce training time. We were unfamiliar with the parallelization of TPU cores on Colab and tried to train using one core, which resulted in a memory error for that TPU core, since the entire ASR model could not be loaded onto a single TPU core. Therefore, we switched back to using GPUs but with just a fraction of the data.
+* Once we were able to get results, the quality of the Russian text was very low since the WER was very high. Thus, we knew that the translations of such text would be pretty bad. We tried to incorporate a Grammatical Error Correction model into our pipeline, but could not figure out how to install the [MAGEC model](https://github.com/grammatical/magec-wnut2019/tree/master/models). We settled for using `pyspellchecker` that simply checks for typos. 
+* We were not able to download the [Helsinki Opus-MT model](https://github.com/Helsinki-NLP/Opus-MT.git) for Russian-to-English MT so we used EasyNMT instead, which is a wrapper around the Opus-MT model with some modifications. 
+* The EasyNMT model was not able to handle some Russian sentences, so we had to remove those from the dataset.
 
 ## ***Experiments and Results***  #TODO: Update with MT results
 Once we were able to train our model, we performed several experiments:
 * At first, we ran the model on only 100 training examples, 20 validation examples, and 20 test examples. We got a WER score of 100%, and the predictions made by the model were all blank (just a series of spaces).
-* At 500 examples, the model started making predictions, but they were mostly jumbled and the spaces were in the wrong places. WER: still 100%.
-* At 1000, WER: 0.6, predictions got better
-* At 4100, WER: around 0.44.
+* At 500 examples, the model started making predictions, but they were mostly jumbled and the spaces were in the wrong places. WER: still 100%;
+* At 1000, WER: around 0.6, predictions got better;
+* At 4100, WER: 0.437.
 
-Final prediction set: XXX utterances, WER: XXX. 
+Final prediction set: 2700 utterances, WER: 0.399.
 
 Since the training of the model for 4100 examples took around 10 hours, we were only able to run 3 experiments of training the model, so we could not explore different hyperparameters. We only changed the logging time from 400 to 100 so that we could see the WER score every 100 utterances.
 
@@ -122,7 +125,24 @@ Other graphs:
 ![Training loss declining over 4100 training iterations](./images/step_TrainingLoss.png?raw=true)
 ![Validation loss declining over 4100 training iterations](./images/step_ValidationLoss.png?raw=true)
 
-Next, we passed the results from our final experiment (trained on XXX sentences with a WER of XXX) into the next step of our pipeline, which is the translation step. We divided this into two experiments: using a spell checker first, and not using a spell checker at all. The results were as follows: ## TODO
+We then passed the results from our final experiment (trained on 4100 sentences with a WER of 0.437) into the next step of our pipeline, which is the translation step. There were 840 test sentences, which we first passed through the spellchecker and then the EasyNMT machine translation model. A .tsv file with our results is in the project repo, but a sample of the sentences is as follows:
+* "I'm sorry I'm standing still.", 
+* 'All salaries paid for household expenses and small non-transferable debts', 
+* "Now it's all about turning words. I'm doing things.", 
+* 'I mean, you know what?', 
+* "I'm a connection. I'm an incident and you're very serious.", 
+* 'I associate myself with the statement that be the name of the European people.', 
+* "You kill me on the funeral, I'm gonna get out.", 
+* 'Zero',
+* 'I thank the representative of Argentina for her statement.', 
+* 'Forgive each other.', 
+* 'I never knew that so many thousand times I was my disgraced mind and head.',
+* "I'm playing.", 
+* 'no one would be able to make a convincing consensus either in the process or in any way.',
+* "I'm coming this way. I'll come for a drink.",
+* 'A minute later, the door was fighting and she came in the bathroom master.'
+
+As we can see, some of the sentences are intelligible English! This suggests that the MT model was able to correctly identify the words and gather some sense of their meanings, despite typos and the lack of spaces between words in some cases. There are a few sentences that do not make sense, such as the last sentence in the sample above, which is expected given the high WER score from the ASR model, and the fact that we are using a simple spell checker instead of a GEC model.
 
 ## ***Future Work***
 In order to improve our model, we would first of all need to improve the WER score. It is high because we were not able to train the model on enough data, due to disk space and time limitations. In order to overcome these limitations, we would need to train the model on all of the data available on CommonVoice. Thus, the first thing we would do is figure out how to get more disk space on Google Colab Pro (or get access to a supercomputer), parallelize the data and model to run on multiple TPU cores, or save checkpoints of a pretrained model, and then train the pretrained model on more data (train in batches).
